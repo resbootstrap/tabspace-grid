@@ -1,5 +1,7 @@
+
+// CONFIG
 $use-gutter: true;
-$use-max-width: true
+$use-max-width: true;
 $use-prefix: ".";
 $class-column: "col";
 $sides: 'left', 'right', 'top', 'bottom';
@@ -7,7 +9,21 @@ $max-width: "1020px";
 $container-width: 100%;
 $container-padding: 20px;
 
-.#{$use-prefix}container {
+// MIXINS
+@mixin clearfix() {
+    *zoom:1;
+
+    &:before,
+    &:after {
+        content:"";
+        display:table;
+    }
+    &:after {
+        clear:both;
+    }
+}
+
+@mixin container() {
     @if $use-gutter {
         padding-left: $container-padding;
         padding-right: $container-padding;
@@ -17,14 +33,23 @@ $container-padding: 20px;
     }
     margin: 0 auto;
     display: block;
-    width: $total-width;
+    width: $container-width;
+}
+
+@mixin row() {
+    display: block;
+    margin: 0 auto;
+    @include clearfix();
+}
+
+
+// GENERATOR
+#{$use-prefix}container {
+    @include container;
 }
 
 #{$use-prefix}row {
-    @include clearfix();
-    width: $container-width;
-    display: block;
-    margin: 0 auto;
+    @include row;
 }
 
 #{$use-prefix}pull-left {
