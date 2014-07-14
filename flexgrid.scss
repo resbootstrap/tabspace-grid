@@ -1,0 +1,54 @@
+$use-gutter: true;
+$use-max-width: true
+$use-prefix: ".";
+$class-column: "col";
+$sides: 'left', 'right', 'top', 'bottom';
+$max-width: "1020px";
+$container-width: 100%;
+$container-padding: 20px;
+
+.#{$use-prefix}container {
+    @if $use-gutter {
+        padding-left: $container-padding;
+        padding-right: $container-padding;
+    }
+    @if $use-max-width {
+        max-width: $max-width;
+    }
+    margin: 0 auto;
+    display: block;
+    width: $total-width;
+}
+
+#{$use-prefix}row {
+    @include clearfix();
+    width: $container-width;
+    display: block;
+    margin: 0 auto;
+}
+
+#{$use-prefix}pull-left {
+    @include float(left);
+}
+
+#{$use-prefix}pull-right {
+    @include float(right);
+}
+
+@for $i from 1 through 10 {
+    #{$use-prefix}#{$class-column}#{$i} {
+        width: $i * 10%;
+        display: inline;
+    }
+}
+
+@each $side in $sides {
+    @for $i from 1 through 10 {
+        #{$use-prefix}off-#{$side}#{$i} {
+            margin-#{$side}: $i * 10px;
+        }
+        #{$use-prefix}pad-#{$side}#{$i} {
+            padding-#{$side}: $i * 10px;
+        }
+    }
+}
