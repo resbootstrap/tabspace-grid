@@ -1,4 +1,4 @@
-.row, [class*="sg-col"] {
+.row, [class*="col"] {
     margin: 10px auto;
 }
 
@@ -6,10 +6,10 @@
     background-color: #e3e3e3;
 }
 
-[class*="sg-col"] {
+[class*="col"] {
     background-color: #cacaca;
 }
 
-.row > [class*="sg-col"] {
+.row > [class*="col"] {
     background-color: #999999;
 }
