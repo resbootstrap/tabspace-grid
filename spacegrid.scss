@@ -1,49 +1,34 @@
-// GRID SYSTEM CONFIG
-// ------------------------------
+////////////////////////////////////////////////////////////////////////////////
+//
+// GRID SYSTEM CONFIGURATION
+//
+////////////////////////////////////////////////////////////////////////////////
 
 // Options
-$use-gutter:        true;                               // Use gutter for container?
-$use-max-width:     true;                               // Use max width for container?
+$use-gutter:        false;                              // Use gutter for container?
+$use-max-width:     false;                              // Use max width for container?
 $use-prefix:        ".";                                // Prefix for use "%" (placeholder) or "." (class).
 
 // Classes
-$class-padding:     "sg-pd";                            // Class for paddings
-$class-margin:      "sg-mg";                            // Class for margins
-$class-centered:    "sg-mid";                           // Class for blocks
-$class-column:      "sg-col";                           // Class for columns
-$sides:             "left", "right", "top", "bottom";   // Which side do you want to use?
+$class-padding:     "pad";                              // Class for paddings
+$class-margin:      "off";                              // Class for margins
+$class-centered:    "cen";                              // Class for vertical align
+$class-middle:      "mid";                              // Class for horizontal align
+$class-column:      "col";                              // Class for columns
+$class-sides:       "left", "right", "top", "bottom";   // Do not change the names, but feel free to remove a side from the list
 
 // Grid Values
-$max-columns:       10;                                 // max value is 10
-$max-margins:       10;                                 // max value is 10
-$max-paddings:      10;                                 // max value is 10
 $max-width:         980px;                              // value for max-width on container
 $container-width:   100%;                               // value for container width
 $container-gutter:  20px;                               // value for container gutter
 
 
 
+////////////////////////////////////////////////////////////////////////////////
+//
 // GRID SYSTEM MIXINS
-// ------------------------------
-
-@mixin box-sizing($boxmodel) {
-  -webkit-box-sizing: $boxmodel;
-     -moz-box-sizing: $boxmodel;
-          box-sizing: $boxmodel;
-}
-
-@mixin clearfix() {
-    *zoom:1;
-
-    &:before,
-    &:after {
-        content:"";
-        display:table;
-    }
-    &:after {
-        clear:both;
-    }
-}
+//
+////////////////////////////////////////////////////////////////////////////////
 
 @mixin container() {
     @if $use-gutter {
@@ -53,20 +38,22 @@ $container-gutter:  20px;                               // value for container g
     @if $use-max-width {
         max-width: $max-width;
     }
-    margin: 0 auto;
-    display: block;
+    margin-left: auto;
+    margin-right: auto;
     width: $container-width;
 }
 
 @mixin row() {
-    display: block;
-    margin: 0 auto;
-    @include clearfix();
+    width: 100%;
+    display: table;
+    table-layout: fixed;
 }
 
 @mixin col($i) {
-    width: $i * 10%;
-    display: inline;
+    display: table-cell;
+    @if $i != 0 {
+        width: $i * 10%;
+    }
 }
 
 @mixin float($side) {
@@ -74,9 +61,14 @@ $container-gutter:  20px;                               // value for container g
   float: unquote($side);
 }
 
-@mixin mid($i: 1) {
+@mixin middle($i: 1) {
     margin-left: $i * 10px;
     margin-right: $i * 10px;
+}
+
+@mixin center($i: 1) {
+    margin-top: $i * 10px;
+    margin-bottom: $i * 10px;
 }
 
 @mixin off($side, $i: 1) {
@@ -87,24 +79,21 @@ $container-gutter:  20px;                               // value for container g
     padding-#{$side}: $i * 10px;
 }
 
-@mixin alpha() {
+@mixin first() {
     margin-left: 0;
 }
 
-@mixin omega() {
+@mixin last() {
     margin-right: 0;
 }
 
 
 
+////////////////////////////////////////////////////////////////////////////////
+//
 // GRID SYSTEM GENERATOR
-// ------------------------------
-
-*,
-*:before,
-*:after {
-    @include box-sizing(border-box);
-}
+//
+////////////////////////////////////////////////////////////////////////////////
 
 #{$use-prefix}container {
     @include container;
@@ -112,10 +101,12 @@ $container-gutter:  20px;                               // value for container g
 #{$use-prefix}row {
     @include row;
 }
+#{$use-prefix}col {
+    @include col(0);
+}
 
-@for $i from 1 through $max-columns {
+@for $i from 1 through 10 {
     #{$use-prefix}#{$class-column}#{$i} {
-        @include float(left);
         width: $i * 10%;
     }
 }
@@ -127,24 +118,38 @@ $container-gutter:  20px;                               // value for container g
     @include float(right);
 }
 
-@for $i from 1 through $max-margins {
+#{$use-prefix}first {
+    @include first;
+}
+#{$use-prefix}last {
+    @include last;
+}
+
+@for $i from 1 through 10 {
     #{$use-prefix}#{$class-centered}#{$i} {
         margin-left: $i * 10px;
         margin-right: $i * 10px;
     }
 }
 
-@each $side in $sides {
-    @for $i from 1 through $max-margins {
-        #{$use-prefix}#{$class-margin}-#{$side}#{$i} {
+@for $i from 1 through 10 {
+    #{$use-prefix}#{$class-middle}#{$i} {
+        margin-top: $i * 10px;
+        margin-bottom: $i * 10px;
+    }
+}
+
+@each $side in $class-sides {
+    @for $i from 1 through 10 {
+        #{$use-prefix}#{$class-margin}#{$side}#{$i} {
             margin-#{$side}: $i * 10px;
         }
     }
 }
 
-@each $side in $sides {
-    @for $i from 1 through $max-paddings {
-        #{$use-prefix}#{$class-padding}-#{$side}#{$i} {
+@each $side in $class-sides {
+    @for $i from 1 through 10 {
+        #{$use-prefix}#{$class-padding}#{$side}#{$i} {
             padding-#{$side}: $i * 10px;
         }
     }
