@@ -4,9 +4,36 @@ A Responsive Grid System based on spaces.
 
 ## Getting Started
 
-> If you don't (want to) use Sass, you can grab the specific CSS file for your desired grid system in the `dist` folder.
+If you don't (want to) use Sass, you can grab the specific CSS file for your desired grid system in the `dist` folder.
 
-## How to use
+**Initial Configuration**
+
+```bash
+// GRID SYSTEM CONFIG
+// ------------------------------
+
+// Options
+$use-gutter:        true;                               // Use gutter for container?
+$use-max-width:     true;                               // Use max width for container?
+$use-prefix:        ".";                                // Prefix for use "%" (placeholder) or "." (class).
+
+// Classes
+$class-padding:     "sg-pd";                            // Class for paddings
+$class-margin:      "sg-mg";                            // Class for margins
+$class-centered:    "sg-mid";                           // Class for blocks
+$class-column:      "sg-col";                           // Class for columns
+$sides:             "left", "right", "top", "bottom";   // Which side do you want to use?
+
+// Grid Values
+$max-columns:       10;                                 // max value is 10
+$max-margins:       10;                                 // max value is 10
+$max-paddings:      10;                                 // max value is 10
+$max-width:         980px;                              // value for max-width on container
+$container-width:   100%;                               // value for container width
+$container-gutter:  20px;                               // value for container gutter
+```
+
+## Usage
 
 A quickly example on how to use the Grid System, with:
 

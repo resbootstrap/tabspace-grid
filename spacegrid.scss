@@ -2,29 +2,48 @@
 // ------------------------------
 
 // Options
-$use-gutter:        true;
-$use-max-width:     true;
-$use-prefix:        ".";
+$use-gutter:        true;                               // Use gutter for container?
+$use-max-width:     true;                               // Use max width for container?
+$use-prefix:        ".";                                // Prefix for use "%" (placeholder) or "." (class).
 
 // Classes
-$class-padding:     "sg-pd";
-$class-margin:      "sg-mg";
-$class-centered:    "sg-mid";
-$class-column:      "sg-col";
-$sides:             "left", "right", "top", "bottom";
+$class-padding:     "sg-pd";                            // Class for paddings
+$class-margin:      "sg-mg";                            // Class for margins
+$class-centered:    "sg-mid";                           // Class for blocks
+$class-column:      "sg-col";                           // Class for columns
+$sides:             "left", "right", "top", "bottom";   // Which side do you want to use?
 
 // Grid Values
-$max-columns:       10;     // max value is 10
-$max-margins:       10;     // max value is 10
-$max-paddings:      10;     // max value is 10
-$max-width:         980px;
-$container-width:   100%;
-$container-gutter:  20px;
+$max-columns:       10;                                 // max value is 10
+$max-margins:       10;                                 // max value is 10
+$max-paddings:      10;                                 // max value is 10
+$max-width:         980px;                              // value for max-width on container
+$container-width:   100%;                               // value for container width
+$container-gutter:  20px;                               // value for container gutter
 
 
 
 // GRID SYSTEM MIXINS
 // ------------------------------
+
+@mixin box-sizing($boxmodel) {
+  -webkit-box-sizing: $boxmodel;
+     -moz-box-sizing: $boxmodel;
+          box-sizing: $boxmodel;
+}
+
+@mixin clearfix() {
+    *zoom:1;
+
+    &:before,
+    &:after {
+        content:"";
+        display:table;
+    }
+    &:after {
+        clear:both;
+    }
+}
 
 @mixin container() {
     @if $use-gutter {
@@ -48,19 +67,6 @@ $container-gutter:  20px;
 @mixin col($i) {
     width: $i * 10%;
     display: inline;
-}
-
-@mixin clearfix() {
-    *zoom:1;
-
-    &:before,
-    &:after {
-        content:"";
-        display:table;
-    }
-    &:after {
-        clear:both;
-    }
 }
 
 @mixin float($side) {
@@ -94,6 +100,12 @@ $container-gutter:  20px;
 // GRID SYSTEM GENERATOR
 // ------------------------------
 
+*,
+*:before,
+*:after {
+    @include box-sizing(border-box);
+}
+
 #{$use-prefix}container {
     @include container;
 }
@@ -103,8 +115,8 @@ $container-gutter:  20px;
 
 @for $i from 1 through $max-columns {
     #{$use-prefix}#{$class-column}#{$i} {
+        @include float(left);
         width: $i * 10%;
-        display: inline;
     }
 }
 

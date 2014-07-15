@@ -1,0 +1,15 @@
+.row, [class*="sg-col"] {
+    margin: 10px auto;
+}
+
+.row {
+    background-color: #e3e3e3;
+}
+
+[class*="sg-col"] {
+    background-color: #cacaca;
+}
+
+.row > [class*="sg-col"] {
+    background-color: #999999;
+}
