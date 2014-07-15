@@ -1,0 +1,139 @@
+// GRID SYSTEM CONFIG
+// ------------------------------
+
+// Options
+$use-gutter:        true;
+$use-max-width:     true;
+$use-prefix:        ".";
+
+// Classes
+$class-padding:     "sg-pd";
+$class-margin:      "sg-mg";
+$class-centered:    "sg-mid";
+$class-column:      "sg-col";
+$sides:             "left", "right", "top", "bottom";
+
+// Grid Values
+$max-columns:       10;     // max value is 10
+$max-margins:       10;     // max value is 10
+$max-paddings:      10;     // max value is 10
+$max-width:         980px;
+$container-width:   100%;
+$container-gutter:  20px;
+
+
+
+// GRID SYSTEM MIXINS
+// ------------------------------
+
+@mixin container() {
+    @if $use-gutter {
+        padding-left: $container-gutter;
+        padding-right: $container-gutter;
+    }
+    @if $use-max-width {
+        max-width: $max-width;
+    }
+    margin: 0 auto;
+    display: block;
+    width: $container-width;
+}
+
+@mixin row() {
+    display: block;
+    margin: 0 auto;
+    @include clearfix();
+}
+
+@mixin col($i) {
+    width: $i * 10%;
+    display: inline;
+}
+
+@mixin clearfix() {
+    *zoom:1;
+
+    &:before,
+    &:after {
+        content:"";
+        display:table;
+    }
+    &:after {
+        clear:both;
+    }
+}
+
+@mixin float($side) {
+  display: inline;
+  float: unquote($side);
+}
+
+@mixin mid($i: 1) {
+    margin-left: $i * 10px;
+    margin-right: $i * 10px;
+}
+
+@mixin off($side, $i: 1) {
+    margin-#{$side}: $i * 10px;
+}
+
+@mixin pad($side, $i: 1) {
+    padding-#{$side}: $i * 10px;
+}
+
+@mixin alpha() {
+    margin-left: 0;
+}
+
+@mixin omega() {
+    margin-right: 0;
+}
+
+
+
+// GRID SYSTEM GENERATOR
+// ------------------------------
+
+#{$use-prefix}container {
+    @include container;
+}
+#{$use-prefix}row {
+    @include row;
+}
+
+@for $i from 1 through $max-columns {
+    #{$use-prefix}#{$class-column}#{$i} {
+        width: $i * 10%;
+        display: inline;
+    }
+}
+
+#{$use-prefix}pull-left {
+    @include float(left);
+}
+#{$use-prefix}pull-right {
+    @include float(right);
+}
+
+@for $i from 1 through $max-margins {
+    #{$use-prefix}#{$class-centered}#{$i} {
+        margin-left: $i * 10px;
+        margin-right: $i * 10px;
+    }
+}
+
+@each $side in $sides {
+    @for $i from 1 through $max-margins {
+        #{$use-prefix}#{$class-margin}-#{$side}#{$i} {
+            margin-#{$side}: $i * 10px;
+        }
+    }
+}
+
+@each $side in $sides {
+    @for $i from 1 through $max-paddings {
+        #{$use-prefix}#{$class-padding}-#{$side}#{$i} {
+            padding-#{$side}: $i * 10px;
+        }
+    }
+}
