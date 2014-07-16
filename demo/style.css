@@ -1,13 +1,8 @@
-.header,
-.main,
-.footer {
-    background-color: #e3e3e3;
-}
-
-.sidebar,
-.content {
-    background-color: #cacaca;
-}
+/*
+--------------------------------------------
+ Grid System
+--------------------------------------------
+*/
 
 .header,
 .main,
@@ -23,26 +18,62 @@
     margin-top: 60px;
 }
 .main {
-    /* @include middle(2); */
-    margin-top: 20px;
-    margin-bottom: 20px;
+    /* @include middle(3); */
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 .content {
     /* @include col(7); */
     display: table-cell;
     width: 70%;
-    /* @include middle(2); */
-    margin-top: 20px;
-    margin-bottom: 20px;
+    /* @include middle(1); */
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .sidebar {
     /* @include col(3); */
     display: table-cell;
     width: 30%;
-    /* @include middle(2); */
-    margin-top: 20px;
-    margin-bottom: 20px;
+    /* @include middle(1); */
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
+
+
+/*
+--------------------------------------------
+ Theme
+--------------------------------------------
+*/
+
+body {
+    font-family: "Arial", sans-serif;
+    color: #666;
+}
+
+.header,
+.main,
+.footer {
+    background-color: #eee;
+}
+
+.sidebar,
+.content {
+    background-color: #ddd;
+}
+
+.wrapper {
+    /* @include center(1); */
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+
+/*
+--------------------------------------------
+ Media Queries
+--------------------------------------------
+*/
 
 @media screen and (max-width: 767px) {
     .content {
