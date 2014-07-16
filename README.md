@@ -1,6 +1,6 @@
-# Space Grid
+# TabSpace Grid
 
-A Responsive Grid System based on spaces.
+A Responsive Grid System based on spaces and tables.
 
 >  Inspired on: https://github.com/mdo/table-grid
 
@@ -32,26 +32,63 @@ $container-gutter:  20px;                               // value for container g
 
 ## Usage
 
-A quickly example on how to use the Grid System, with:
-
-### Modular CSS
+A quickly example on how to use the **TabSpace Grid**:
 
 ```html
 <div class="container">
-    <div class="row mid1">
-        <div class="col col5">...</div>
-        <div class="col col5">...</div>
-    </div>
-    <div class="row mid1">
-        <div class="col col5">
-            <div class="col col4">...</div>
-            <div class="col col6">...</div>
-        </div>
-        <div class="col col5">...</div>
-    </div>
+
+    <header class="header">
+        <h1>Header Title</h1>
+    </header>
+
+    <section class="main">
+        <section class="content">
+            <p>Content goes here</p>
+        </section>
+        <section class="sidebar">
+            <p>Sidebar geos here</p>
+        </section>
+    </section>
+
+    <footer class="footer">
+        <p>Footer text</p>
+    </footer>
+
 </div>
 ```
 
+```css
+.header,
+.main,
+.footer {
+    @include row;               /* -> width: 100%; display: table; table-layout: fixed; */
+}
+
+.header {
+    @include margin("top", 6);  /* -> margin-top: 60px; */
+}
+.main {
+    @include middle(2);         /* -> margin-top: 20px; margin-bottom: 20px; */
+}
+.content {
+    @include col(7);            /* -> display: table-cell; width: 70%; */
+    @include middle(1);         /* -> margin: 10px auto 10px auto; */
+
+}
+.sidebar {
+    @include col(3);            /* -> display: table-cell; width: 30%; */
+    @include middle(1);         /* -> margin: 10px auto 10px auto; */
+}
+
+@media screen and (max-width: 767px) {
+    .content {
+        @include col(10); /* -> display: table-row; width: 100%; */
+    }
+    .sidebar {
+        @include col(10); /* -> display: table-row; width: 100%; */
+    }
+}
+```
 #### Options:
 
 - **columns:** 1 to 10
@@ -62,32 +99,6 @@ A quickly example on how to use the Grid System, with:
 - **floats:** left, right
 - **forces:** last (force to margin right), first (force to margin left)
 
-
-### Semantic CSS
-
-```css
-.main {
-    @include row;       /* -> width: 100%; display: table; table-layout: fixed; */
-}
-.content {
-    @include col(7);    /* -> display: table-cell; width: 70%; */
-    @include middle(1); /* -> margin: 10px auto 10px auto; */
-
-}
-.sidebar {
-    @include col(3);    /* -> display: table-cell; width: 30%; */
-    @include middle(1); /* -> margin: 10px auto 10px auto; */
-}
-
-@media screen and (max-width: 767px) {
-    .content {
-        @include col(10); /* -> display: table-cell; width: 100%; */
-    }
-    .sidebar {
-        @include col(10); /* -> display: table-cell; width: 100%; */
-    }
-}
-```
 
 
 ## License

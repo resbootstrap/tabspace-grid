@@ -13,17 +13,16 @@
 }
 
 /* Columns */
-.col            { display: table-cell; }
-.col1           { width: 10%; }
-.col2           { width: 20%; }
-.col3           { width: 30%; }
-.col4           { width: 40%; }
-.col5           { width: 50%; }
-.col6           { width: 60%; }
-.col7           { width: 70%; }
-.col8           { width: 80%; }
-.col9           { width: 90%; }
-.col10          { width: 100%; }
+.col1           { display: table-cell; width: 10%; }
+.col2           { display: table-cell; width: 20%; }
+.col3           { display: table-cell; width: 30%; }
+.col4           { display: table-cell; width: 40%; }
+.col5           { display: table-cell; width: 50%; }
+.col6           { display: table-cell; width: 60%; }
+.col7           { display: table-cell; width: 70%; }
+.col8           { display: table-cell; width: 80%; }
+.col9           { display: table-cell; width: 90%; }
+.col10          { display: table-row; width: 100%; }
 
 /* Floats */
 .pull-left      { display: inline; float: left; }

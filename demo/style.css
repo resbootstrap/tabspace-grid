@@ -1,15 +1,58 @@
-.row, [class*="col"] {
-    margin: 10px auto;
-}
-
-.row {
+.header,
+.main,
+.footer {
     background-color: #e3e3e3;
 }
 
-[class*="col"] {
+.sidebar,
+.content {
     background-color: #cacaca;
 }
 
-.row > [class*="col"] {
-    background-color: #999999;
+.header,
+.main,
+.footer {
+    /* @include row; */
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+}
+
+.header {
+    /* @include margin("top", 6); */
+    margin-top: 60px;
+}
+.main {
+    /* @include middle(2); */
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.content {
+    /* @include col(7); */
+    display: table-cell;
+    width: 70%;
+    /* @include middle(2); */
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.sidebar {
+    /* @include col(3); */
+    display: table-cell;
+    width: 30%;
+    /* @include middle(2); */
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 767px) {
+    .content {
+        /* @include col(10); */
+        display: table-row;
+        width: 100%;
+    }
+    .sidebar {
+        /* @include col(10); */
+        display: table-row;
+        width: 100%;
+    }
 }

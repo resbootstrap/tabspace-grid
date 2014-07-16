@@ -50,10 +50,12 @@ $container-gutter:  20px;                               // value for container g
 }
 
 @mixin col($i) {
-    display: table-cell;
-    @if $i != 0 {
-        width: $i * 10%;
+    @if $i == 10 {
+        display: table-row;
+    } @else {
+        display: table-cell;
     }
+    width: $i * 10%;
 }
 
 @mixin float($side) {
@@ -61,21 +63,21 @@ $container-gutter:  20px;                               // value for container g
   float: unquote($side);
 }
 
-@mixin middle($i: 1) {
+@mixin middle($i) {
     margin-left: $i * 10px;
     margin-right: $i * 10px;
 }
 
-@mixin center($i: 1) {
+@mixin center($i) {
     margin-top: $i * 10px;
     margin-bottom: $i * 10px;
 }
 
-@mixin off($side, $i: 1) {
+@mixin off($side, $i) {
     margin-#{$side}: $i * 10px;
 }
 
-@mixin pad($side, $i: 1) {
+@mixin pad($side, $i) {
     padding-#{$side}: $i * 10px;
 }
 
@@ -101,13 +103,10 @@ $container-gutter:  20px;                               // value for container g
 #{$use-prefix}row {
     @include row;
 }
-#{$use-prefix}col {
-    @include col(0);
-}
 
 @for $i from 1 through 10 {
     #{$use-prefix}#{$class-column}#{$i} {
-        width: $i * 10%;
+        @include col($i);
     }
 }
 
@@ -127,22 +126,20 @@ $container-gutter:  20px;                               // value for container g
 
 @for $i from 1 through 10 {
     #{$use-prefix}#{$class-centered}#{$i} {
-        margin-left: $i * 10px;
-        margin-right: $i * 10px;
+        @include center($i);
     }
 }
 
 @for $i from 1 through 10 {
     #{$use-prefix}#{$class-middle}#{$i} {
-        margin-top: $i * 10px;
-        margin-bottom: $i * 10px;
+        @include middle($i);
     }
 }
 
 @each $side in $class-sides {
     @for $i from 1 through 10 {
         #{$use-prefix}#{$class-margin}#{$side}#{$i} {
-            margin-#{$side}: $i * 10px;
+            @include off($side, $i);
         }
     }
 }
@@ -150,7 +147,7 @@ $container-gutter:  20px;                               // value for container g
 @each $side in $class-sides {
     @for $i from 1 through 10 {
         #{$use-prefix}#{$class-padding}#{$side}#{$i} {
-            padding-#{$side}: $i * 10px;
+            @include pad($side, $i);
         }
     }
 }
