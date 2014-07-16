@@ -2,15 +2,19 @@
 
 A Responsive Grid System based on spaces and tables.
 
->  Inspired on: https://github.com/mdo/table-grid
+An experimental and based work on:
+
+- [table-grid](https://github.com/mdo/table-grid)
+- [ungrid](https://github.com/chrisnager/ungrid)
+
 
 ## Getting Started
 
-If you don't (want to) use Sass, you can grab the specific CSS file for your desired grid system in the `dist` folder.
+If you don't (want to) use Sass, you can grab the CSS file in the `dist` folder.
 
-**Initial Configuration**
+**Initial Configurations:**
 
-```bash
+```sass
 // Options
 $use-gutter:        false;                              // Use gutter for container?
 $use-max-width:     false;                              // Use max width for container?
