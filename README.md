@@ -40,24 +40,20 @@ A quickly example on how to use the **TabSpace Grid**:
 
 ```html
 <div class="container">
-
     <header class="header">
         <h1>Header Title</h1>
     </header>
-
     <section class="main">
         <section class="content">
-            <p>Content goes here</p>
+            <p>Main content goes here</p>
         </section>
         <section class="sidebar">
-            <p>Sidebar geos here</p>
+            <p>Sidebar content goes here</p>
         </section>
     </section>
-
     <footer class="footer">
         <p>Footer text</p>
     </footer>
-
 </div>
 ```
 
